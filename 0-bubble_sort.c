@@ -15,7 +15,6 @@ int tmp = 0;
 size_t the_size = size;
 int swapped = 1;
 
-
 while (swapped)
 {
 swapped = 0;
