@@ -1,82 +1,72 @@
 #include "sort.h"
-int partition(int *array, int lb, int ub, size_t size)
+/**
+ * partition - returns the pivot
+ * @array: the array
+ * @lbb: lower boundary
+ * @ubb: upper boundary
+ * @size: the size of the array
+ * Return: the pivot
+ */
+int partition(int *array, int lbb, int ubb, size_t size)
 {
 
-int start, end;
-int tmp, pivot;
+int a, b, tmp, pivot;
 
-/** printf("size = %ld", size);*/
-pivot = array[ub];
-start = lb - 1;
-end = ub;
+pivot = array[ubb];
 
-/** printf("pivot is: %d \n", pivot); */
-/** printf("getting here 1\n");*/
-while (start < end)
+for (b = lbb, a = lbb - 1; b < ubb; b++)
 {
-/** printf("getting here 2 \n");*/
-while(array[start] <= pivot)
+if (array[b] < pivot)
 {
-start++;
-/** printf("start = %ld \n", start);*/
-}
-while (array[end] > pivot)
-{
-/**printf("end = %ld \n", end);*/
-end--;
-/** printf("end = %ld \n", end);*/
-}
-if (start < end)
-{
-tmp = array[end];
-array[end] = array[start];
-array[start] = tmp;
-
+a++;
+tmp = array[a];
+array[a] = array[b];
+array[b] = tmp;
+if (array[a] != array[b])
 print_array(array, size);
 }
 }
-tmp = array[end];
-array[end] = array[lb];
-array[lb] = tmp;
 
-
-/** printf(" pivot: %ld \n", end);*/
-return (end);
+tmp = array[a + 1];
+array[a + 1] = pivot;
+array[b] = tmp;
+if (array[ubb] != array[a + 1])
+print_array(array, size);
+return (a + 1);
 }
-
 /**
- * @brief 
- * 
- *
+ * quicksort - sorts the array recursively
+ * @array: the array
+ * @lb: lower boundary
+ * @ub: upper boundary
+ * @size: the size of the array
  */
-
 void quicksort(int *array, int lb, int ub, size_t size)
 {
-int location;
+int pivot;
 
 if (lb < ub)
 {
-location = partition(array, lb, ub, size);
+pivot = partition(array, lb, ub, size);
 /** printf("pivot inside recur: %ld", pivot);*/
-quicksort(array, lb, location - 1, size);
-quicksort(array, location + 1, ub, size);
+quicksort(array, lb, pivot - 1, size);
+quicksort(array, pivot + 1, ub, size);
 }
 
 }
 
 
 /**
- * @brief 
- * 
+ * quick_sort - sorts array using recursion and lomuto
+ * @array: the array
+ * @size: the size of the array
  */
 void quick_sort(int *array, size_t size)
 {
 
 if (!array || size < 2)
 return;
-/**printf("%d", partition(array, lb, ub, size));
-printf("out of the pivot print");
-quicksort(array, 0, size -1, size);*/
-quicksort(array, 0, size -1, size);
-print_array(array, size);
+
+quicksort(array, 0, size - 1, size);
+/** print_array(array, size); */
 }
