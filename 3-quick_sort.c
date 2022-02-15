@@ -31,6 +31,7 @@ if (start < end)
 tmp = array[end];
 array[end] = array[start];
 array[start] = tmp;
+
 print_array(array, size);
 }
 }
@@ -38,8 +39,6 @@ tmp = array[end];
 array[end] = array[lb];
 array[lb] = tmp;
 
-
-/** print_array(array, size);*/
 
 /** printf(" pivot: %ld \n", end);*/
 return (end);
@@ -62,6 +61,7 @@ location = partition(array, lb, ub, size);
 quicksort(array, lb, location - 1, size);
 quicksort(array, location + 1, ub, size);
 }
+
 }
 
 
@@ -78,4 +78,5 @@ return;
 printf("out of the pivot print");
 quicksort(array, 0, size -1, size);*/
 quicksort(array, 0, size -1, size);
+print_array(array, size);
 }
